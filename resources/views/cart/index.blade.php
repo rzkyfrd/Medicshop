@@ -46,14 +46,21 @@
                                                 <form>
                                                     <div>
                                                         <label for="quantity" class="sr-only"> Quantity </label>
-                                                        <div x-data="{ quantity: 1 }" class="flex items-center rounded border border-gray-200">
-                                                            <button x-on:click="quantity = (quantity == 1 ) ? 1 : quantity-1" type="button" class="size-6 leading-6 text-gray-600 transition hover:opacity-75">
+                                                        <div x-data="{ quantity: 1 }"
+                                                            class="flex items-center rounded border border-gray-200">
+                                                            <button
+                                                                x-on:click="quantity = (quantity == 1 ) ? 1 : quantity-1"
+                                                                type="button"
+                                                                class="size-6 leading-6 text-gray-600 transition hover:opacity-75">
                                                                 −
                                                             </button>
 
-                                                            <input type="number" id="quantity" x-model="quantity" name="quantity" class="py-0 w-10 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&amp;::-webkit-inner-spin-button]:m-0 [&amp;::-webkit-inner-spin-button]:appearance-none [&amp;::-webkit-outer-spin-button]:m-0 [&amp;::-webkit-outer-spin-button]:appearance-none">
+                                                            <input type="number" id="quantity" x-model="quantity"
+                                                                name="quantity"
+                                                                class="py-0 w-10 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&amp;::-webkit-inner-spin-button]:m-0 [&amp;::-webkit-inner-spin-button]:appearance-none [&amp;::-webkit-outer-spin-button]:m-0 [&amp;::-webkit-outer-spin-button]:appearance-none">
 
-                                                            <button x-on:click="quantity++" type="button" class="size-6 leading-6 text-gray-600 transition hover:opacity-75">
+                                                            <button x-on:click="quantity++" type="button"
+                                                                class="size-6 leading-6 text-gray-600 transition hover:opacity-75">
                                                                 +
                                                             </button>
                                                         </div>
@@ -120,7 +127,7 @@
                                                 </a>
                                             </div>
                                             <div>
-                                                <a href="#"
+                                                <a href="{{ route('master.order.create') }}"
                                                     class="
                                                 block rounded bg-green-800 px-5 py-3 text-sm text-white transition hover:bg-green-600">
                                                     Checkout

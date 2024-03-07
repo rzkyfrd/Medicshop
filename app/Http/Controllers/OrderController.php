@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\User;
+use App\Models\Category;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -20,7 +25,11 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $order = new Order();
+        $user_id = Auth::user()->id;
+        $cart = Cart::with('product', 'category', 'user')->where('user_id', $user_id)->get();
+
+        return view('order.form', compact('order', 'cart'));
     }
 
     /**

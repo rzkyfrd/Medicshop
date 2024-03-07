@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -42,6 +43,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('category', CategoryController::class);
         Route::resource('product', ProductController::class);
         Route::resource('user', UserController::class);
+        Route::resource('order', OrderController::class);
     });
     Route::resource('cart', CartController::class);
 });
