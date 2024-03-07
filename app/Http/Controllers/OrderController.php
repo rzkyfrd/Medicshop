@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\OrderLog;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::with('details')->where('user_id', Auth::user()->id)->whereIn('status', ['Waiting For Payment', 'Process'])->get();
+        return view('order.index', compact('orders'));
     }
 
     /**
@@ -41,12 +43,17 @@ class OrderController extends Controller
     {
         DB::beginTransaction();
         try {
-            Cart::create($request->all());
+            $user_id = Auth::user()->id;
+            Order::create([
+                ...$request->except('user_id'),
+                'user_id' => $user_id,
+                'status' => 'Waiting For Payment'
+            ]);
 
             DB::commit();
             return redirect()->route('order.index')->with('message', 'Order precessed successfully');
         } catch (\Throwable $th) {
-            //throw $th;
+            throw $th;
             DB::rollBack();
             return redirect()->back()->withInput()->withErrors(['Failed To Process Order']);
         }
@@ -73,7 +80,17 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $order->update([
+                'status' => $request->status
+            ]);
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            throw $th;
+            DB::rollBack();
+        }
     }
 
     /**
@@ -81,6 +98,18 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $order->update([
+                'status' => 'Canceled'
+            ]);
+
+            DB::commit();
+            return redirect()->back()->with('message', 'Order Canceled');
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return redirect()->back()->withErrors(['Failed To Cancel Order']);
+        }
     }
 }

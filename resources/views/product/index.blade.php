@@ -1,10 +1,10 @@
 <x-app-layout>
 
-    <x-slot name="header">
+    {{-- <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Product') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
 
     {{-- session status --}}
     {{-- <x-auth-session-status class="mb-4" :status="Session('message')" /> --}}
@@ -28,7 +28,7 @@
                             <th style="width: 240px">Description</th>
                             <th>Image</th>
                             <th>Price</th>
-                            <th>Action</th>
+                            <th class="w-40">Action</th>
                         </tr>
                     </thead>
                     <tbody style="vertical-align: middle">
@@ -42,19 +42,16 @@
                                     <img style="width:120px;" src="{{ asset($item['image']) }}">
                                 </td>
                                 <td>@currency($item->price)</td>
-                                <td>
+                                <td class="flex items-center gap-2">
                                     <a href="{{ route('master.product.edit', $item) }}" class="btn btn-primary">
                                         Edit
                                     </a>
-                                    {{-- <button class="btn btn-danger">Delete</button> --}}
 
-                                    <button class="btn btn-danger" data-id="{{ $item }}"
-                                        data-nama="{{ $item }}"
-                                        data-location="{{ route('master.product.edit', $item) }}">Delete
-                                    </button>
-                                    {{-- <button class="btn btn-danger btn-sm" data-id="{{ $row->id }}" data-nama="{{ $row->namabarang }}" data-location="/deletebarang/{{ $row->id }}">
-                                        <i class="uil uil-trash-alt font-size-15"></i>
-                                    </button> --}}
+                                    <form method="POST" action="{{ route('master.product.destroy', $item) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger bg-red-600 hover:bg-white hover:text-red-600">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty
@@ -64,6 +61,9 @@
                         @endforelse ()
                     </tbody>
                 </table>
+                <div class="w-full my-4">
+                    {{ $product->links() }}
+                </div>
             </div>
         </div>
     </div>

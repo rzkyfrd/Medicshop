@@ -2,7 +2,7 @@
 
     <div class="py-4">
         <div class="w-3/4 mx-auto sm:px-6 lg:px-8">
-            <div class="px-10 py-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="px-10 py-4 mb-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <p class="text-right font-semibold mb-2">
                     <a href="{{ route('cart.index') }}"><x-fas-arrow-left-long class="w-4 inline-block mr-4" /> Back</a>
                 </p>

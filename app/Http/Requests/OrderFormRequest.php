@@ -44,7 +44,6 @@ class OrderFormRequest extends FormRequest
             ],
             'bank' => [
                 'required_if:payment_method,prepaid',
-                'in:credit,debit,paypal'
             ],
             'paypal_id' => [
                 'required_if:bank,paypal',

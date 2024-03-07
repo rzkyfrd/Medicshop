@@ -13,7 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::all();
+        $category = Category::paginate(10);
         return view('category.index', compact('category'));
     }
 
@@ -67,6 +67,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->back()->with('message', 'Category Deleted Successfully');
     }
 }

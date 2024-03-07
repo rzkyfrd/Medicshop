@@ -109,6 +109,16 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $cart->delete();
+
+            DB::commit();
+            return redirect()->back()->with('message', 'Item Removed Successfully');
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return redirect()->back()->withErrors(['Failed To Remove Item']);
+        }
     }
 }

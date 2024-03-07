@@ -16,7 +16,7 @@
                         {{ __('Product List') }}
                     </x-nav-link>
                     @if (Auth::user()?->is_admin == 0)
-                        <x-nav-link :href="route('cart.index')">
+                        <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.*')">
                             {{ __('Cart') }}
                         </x-nav-link>
                     @endif
@@ -38,8 +38,8 @@
                             {{ __('Shipping Order') }}
                         </x-nav-link>
                     @elseif (Auth::user())
-                        <x-nav-link :href="''">
-                            {{ __('Order') }}
+                        <x-nav-link :href="route('order.index')" :active="request()->routeIs('order.*')">
+                            {{ __('My Order') }}
                         </x-nav-link>
 
                         <x-nav-link :href="'#'">

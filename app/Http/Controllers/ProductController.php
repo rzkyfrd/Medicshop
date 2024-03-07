@@ -14,9 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
-        $category = Category::all();
-        return view('product.index', compact('product', 'category'));
+        $product = Product::paginate(10);
+        return view('product.index', compact('product'));
     }
 
     /**
@@ -85,6 +84,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->back()->with('message', 'Product Deleted Successfully');
     }
 }

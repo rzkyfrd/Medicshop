@@ -34,7 +34,7 @@
         @endif
 
         <!-- Page Content -->
-        <main style="height: calc(100vh);" class="overflow-y-auto">
+        <main style="height: calc(100vh - 4rem);" class="overflow-y-auto">
             {{ $slot }}
         </main>
     </div>
