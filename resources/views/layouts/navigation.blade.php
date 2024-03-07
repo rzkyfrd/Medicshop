@@ -13,23 +13,48 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                        {{ __('Home') }}
+                        {{ __('Product List') }}
                     </x-nav-link>
+                    @if (Auth::user()?->is_admin == 0)
+                        <x-nav-link :href="route('cart.index')">
+                            {{ __('Cart') }}
+                        </x-nav-link>
+                    @endif
+                    @if (Auth::user()?->is_admin)
+                        <x-nav-link-parent :href="'#'" :active="request()->routeIs('padron.*')">
+                            <x-slot name="name">Data Master</x-slot>
+                            <x-slot name="children">
+                                <a href="user">Data User</a>
+                                <span class="separator"></span>
+                                <a href="category">Data Category</a>
+                                <span class="separator"></span>
+                                <a href="product">Data Product</a>
+                            </x-slot>
+                        </x-nav-link-parent>
+                        <x-nav-link :href="route('home')">
+                            {{ __('Confirm Payment') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('home')">
+                            {{ __('Shipping Order') }}
+                        </x-nav-link>
+                    @elseif (Auth::user())
+                        <x-nav-link :href="''">
+                            {{ __('Order') }}
+                        </x-nav-link>
 
-                    <x-nav-link-parent :href="'#'" :active="request()->routeIs('padron.*')">
-                        <x-slot name="name">Data Master</x-slot>
-                        <x-slot name="children">
-                            <a href="#">Data Customer</a>
-                            <span class="separator"></span>
-                            <a href="category">Data Category</a>
-                            <span class="separator"></span>
-                            <a href="#">Data Product</a>
-                        </x-slot>
-                    </x-nav-link-parent>
+                        <x-nav-link :href="'#'">
+                            {{ __('Payment') }}
+                        </x-nav-link>
+                    @endif
 
-                    <x-nav-link :href="'#'" :active="request()->routeIs('home')">
-                        {{ __('Shipping Order') }}
-                    </x-nav-link>
+
+                    @if (Auth::user()?->is_admin == 0)
+                        <x-nav-link :href="'#'">
+                            {{ __('Customer Feedback') }}
+                        </x-nav-link>
+                    @endif
+
+
                 </div>
                 {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-6 sm:flex">
 

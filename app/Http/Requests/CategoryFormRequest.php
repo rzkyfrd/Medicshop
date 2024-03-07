@@ -24,10 +24,11 @@ class CategoryFormRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                'unique:categories,name',
+                'unique:categories,name' . ($this->method() == 'PUT' ? ',' . $this->category->id : ''),
                 'max:255'
             ],
             'desc' => [
+                'required',
                 'max:255'
             ]
         ];

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryFormRequest;
-use App\Models\category;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -22,7 +22,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        $category = new Category();
+        return view('category.form', compact('category'));
     }
 
     /**
@@ -31,7 +32,7 @@ class CategoryController extends Controller
     public function store(CategoryFormRequest $request)
     {
         $data = $request->validated();
-        $category = Category::create($data);
+        Category::create($data);
         return redirect('/category')->with('message', 'Category Added Successfully');
     }
 
@@ -46,23 +47,25 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(category $category)
+    public function edit(Category $category)
     {
-        //
+        return view('category.form', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, category $category)
+    public function update(CategoryFormRequest $request, Category $category)
     {
-        //
+        $data = $request->validated();
+        $category->update($data);
+        return redirect('/category')->with('message', 'Category Updated Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(category $category)
+    public function destroy(Category $category)
     {
         //
     }
