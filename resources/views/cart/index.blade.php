@@ -14,7 +14,7 @@
             <div class="py-2 px-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <section>
                     <div class="mx-auto max-w-screen-xl px-4 py-4 sm:px-6 sm:py-12 lg:px-8">
-                        <div class="mx-auto max-w-3xl">
+                        <div class="border px-10 py-1 rounded mx-auto max-w-3xl">
                             <header class="text-center">
                                 <h1 class="text-xl font-bold text-gray-900 sm:text-3xl">Your Cart</h1>
                             </header>
@@ -44,11 +44,25 @@
 
                                             <div class="flex flex-1 items-center justify-end gap-2">
                                                 <form>
-                                                    <label for="Line1Qty" class="sr-only"> Quantity </label>
+                                                    <div>
+                                                        <label for="quantity" class="sr-only"> Quantity </label>
+                                                        <div x-data="{ quantity: 1 }" class="flex items-center rounded border border-gray-200">
+                                                            <button x-on:click="quantity = (quantity == 1 ) ? 1 : quantity-1" type="button" class="size-6 leading-6 text-gray-600 transition hover:opacity-75">
+                                                                −
+                                                            </button>
+
+                                                            <input type="number" id="quantity" x-model="quantity" name="quantity" class="py-0 w-10 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&amp;::-webkit-inner-spin-button]:m-0 [&amp;::-webkit-inner-spin-button]:appearance-none [&amp;::-webkit-outer-spin-button]:m-0 [&amp;::-webkit-outer-spin-button]:appearance-none">
+
+                                                            <button x-on:click="quantity++" type="button" class="size-6 leading-6 text-gray-600 transition hover:opacity-75">
+                                                                +
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    {{-- <label for="Line1Qty" class="sr-only"> Quantity </label>
 
                                                     <input type="number" min="1" value="{{ $row->quantity }}"
                                                         id="Line1Qty"
-                                                        class="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none" />
+                                                        class="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none" /> --}}
                                                 </form>
 
                                                 <button class="text-gray-600 transition hover:text-red-600">
@@ -63,10 +77,11 @@
                                                 </button>
                                             </div>
                                         </li>
+                                        <hr class="text-gray-500">
                                     @endforeach
                                 </ul>
 
-                                <div class="mt-8 flex justify-end border-t border-gray-100 pt-8">
+                                <div class="mt-8 flex justify-end pt-8">
                                     <div> </div>
                                     <div class="w-96 max-w-lg space-y-4">
                                         <dl class="space-y-0.5 text-sm text-gray-700">

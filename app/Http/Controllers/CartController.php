@@ -37,28 +37,21 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $user_id = Auth::user()->id;
-        $cek = Auth::user()->is_admin;
-        if ($cek == 1) {
+        if (Auth::user()->is_admin) {
             return redirect('/')->with('message', 'Cart can only be accessed for customers');
         }
-        $cart = Cart::where('user_id', $user_id)->where('product_id', $request->id)->get();
-        $count = $cart->count();
-        if ($count == 1) {
-            $idcart = Cart::where('user_id', $user_id)->where('product_id', $request->id)->first(['id'])->id;
-            $amount = Cart::where('user_id', $user_id)->where('product_id', $request->id)->first(['quantity'])->quantity;
-            $cart = Cart::find($idcart);
-            $amount = $amount + $request->quantity;
+        $cart = Cart::where('user_id', $user_id)->where('product_id', $request->id)->first();
+        if ($cart) {
             $cart->update([
-                'quantity' => $amount,
+                'quantity' => $cart->quantity + $request->quantity,
             ]);
             return redirect('/cart')->with('message', 'Product Add To Cart Successfully');
         }
         Cart::create([
             'user_id' => $user_id,
             'product_id' => $request->id,
-            'quantity' => $request->quantity,
+            'quantity' => $request->quantity ?? 1,
         ]);
         return redirect('/cart')->with('message', 'Product Add To Cart Successfully');
     }
