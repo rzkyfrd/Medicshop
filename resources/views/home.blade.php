@@ -82,7 +82,7 @@
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-4 col-span-3">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-4 col-span-3 w-full">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <section>
@@ -113,6 +113,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <hr class="mt-4">
+                            @if ($product->count() == 0)
+                                <div class="flex justify-center mt-4 font-semibold text-xl">
+                                    <p>Product Tidak Ditemukan</p>
+                                </div>
+                            @endif
 
                             <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 
@@ -145,9 +151,11 @@
                                 @endforeach
                             </ul>
 
-                            <div class="w-full mt-4">
-                                {{ $product->links() }}
-                            </div>
+                            @if ($product->count() > 0)
+                                <div class="w-full mt-4">
+                                    {{ $product->links() }}
+                                </div>
+                            @endif
                             {{-- <ol class="mt-8 flex justify-center gap-1 text-xs font-medium">
                                 <li>
                                     <a href="#"
