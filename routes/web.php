@@ -37,6 +37,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::group(['prefix' => 'master', 'as' => 'master.'], function () {
+        Route::resource('category', CategoryController::class);
+        Route::resource('product', ProductController::class);
+        Route::resource('user', UserController::class);
+    });
+    Route::resource('cart', CartController::class);
 });
 
 // Route::controller(App\Http\Controllers\CategoryController::class)->group(function () {
@@ -44,11 +51,5 @@ Route::middleware('auth')->group(function () {
 //     Route::get('/add-category', 'create');
 //     Route::post('/save-category', 'store');
 // });
-Route::group(['middleware' => 'auth', 'prefix' => 'master', 'as' => 'master.'], function () {
-    Route::resource('category', CategoryController::class);
-    Route::resource('product', ProductController::class);
-    Route::resource('cart', CartController::class);
-    Route::resource('user', UserController::class);
-});
 
 require __DIR__ . '/auth.php';
