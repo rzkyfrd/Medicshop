@@ -21,6 +21,10 @@ class OrderController extends Controller
      */
     public function index()
     {
+        if(Auth::user()->is_admin){
+            $orders = Order::with('details')->orderBy('created_at', 'desc')->paginate(10);
+            return view('order.admin.index', compact('orders'));
+        }
         $orders = Order::with('details')->where('user_id', Auth::user()->id)->whereIn('status', ['Waiting For Payment', 'Process'])->get();
         return view('order.index', compact('orders'));
     }
@@ -88,8 +92,10 @@ class OrderController extends Controller
             ]);
 
             DB::commit();
+            return redirect()->back()->with('message', 'Order Status Changed Successfully');
         } catch (\Throwable $th) {
-            throw $th;
+            // throw $th;
+            return redirect()->back()->withErrors(['Order Status Failed To Changed']);
             DB::rollBack();
         }
     }

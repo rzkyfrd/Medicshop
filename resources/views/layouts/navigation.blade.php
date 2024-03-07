@@ -31,19 +31,12 @@
                                 <a href="{{ route('master.product.index') }}">Data Product</a>
                             </x-slot>
                         </x-nav-link-parent>
-                        <x-nav-link :href="route('home')">
-                            {{ __('Confirm Payment') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('home')">
-                            {{ __('Shipping Order') }}
+                        <x-nav-link :href="route('order.index')" :active="request()->routeIs('order.*')">
+                            {{ __('Order Lists') }}
                         </x-nav-link>
                     @elseif (Auth::user())
                         <x-nav-link :href="route('order.index')" :active="request()->routeIs('order.*')">
                             {{ __('My Order') }}
-                        </x-nav-link>
-
-                        <x-nav-link :href="'#'">
-                            {{ __('Payment') }}
                         </x-nav-link>
                     @endif
 
