@@ -76,22 +76,30 @@
                                                     <dd>{{ $order->bank }}</dd>
                                                 </div>
                                                 <div class="flex justify-between">
-                                                    <dt>Shipping Fee</dt>
-                                                    <dd>@currency(20000)</dd>
+                                                    <dt>Status</dt>
+                                                    <dd>{{ $order->status }}</dd>
                                                 </div>
                                                 <div class="flex justify-between">
                                                     <dt>Grand Total</dt>
                                                     <dd class="font-bold">@currency($order->details->sum(function ($item) {
                                                         return $item->quantity*$item->price;
-                                                    }) + 20000)</dd>
+                                                    }))</dd>
                                                 </div>
                                             </dl>
 
-                                            <div class="flex justify-between w-80">
-                                                <form class="w-full" action="{{ route('order.update', $order) }}">
+                                            <div class="flex flex-col justify-between w-80 gap-2">
+                                                <div class="flex justify-between gap-2">
+                                                    <a href="{{ route('order.show', $order) }}" class="block rounded bg-blue-400 w-full py-1 text-center text-sm text-white transition hover:bg-blue-500" href="">
+                                                        Detail
+                                                    </a>
+                                                    <a class="block rounded bg-green-400 w-full py-1 text-center text-sm text-white transition hover:bg-green-500" href="">
+                                                        Cetak
+                                                    </a>
+                                                </div>
+                                                <form method="POST" class="w-full" action="{{ route('order.destroy', $order) }}">
                                                     @csrf
-                                                    @method('PUT')
-                                                    <button class="block rounded bg-red-600 w-full py-3 text-center text-sm text-white transition hover:bg-red-800">
+                                                    @method('DELETE')
+                                                    <button class="block rounded bg-red-600 w-full py-1 text-center text-sm text-white transition hover:bg-red-800">
                                                         Cancel
                                                     </button>
                                                 </form>

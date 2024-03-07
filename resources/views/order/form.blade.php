@@ -75,7 +75,7 @@
                                 <label for="bank" class="block text-xs font-medium text-gray-700"> Bank </label>
                                 <select name="bank" id="bank"
                                     class="mt-1 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm">
-                                    <option>Please select bank</option>
+                                    <option disabled>Please select bank</option>
                                     <option {{ old('bank') === 'credit' ? 'selected' : '' }} value="credit">Credit</option>
                                     <option {{ old('bank') === 'debit' ? 'selected' : '' }} value="debit">Debit</option>
                                     <option {{ old('bank') === 'paypal' ? 'selected' : '' }} value="paypal">Paypal</option>

@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('user', UserController::class);
     });
     Route::resource('order', OrderController::class);
+    Route::get('order/print/{order}', [OrderController::class, 'print'])->name('order.print');
     Route::resource('cart', CartController::class);
 });
 

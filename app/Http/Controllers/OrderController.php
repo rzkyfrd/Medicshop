@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderLog;
 use App\Models\Product;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -64,7 +65,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('order.show', compact('order'));
     }
 
     /**
@@ -111,5 +112,22 @@ class OrderController extends Controller
             DB::rollBack();
             return redirect()->back()->withErrors(['Failed To Cancel Order']);
         }
+    }
+
+    public function print(Order $order)
+    {
+        $dompdf = new Dompdf();
+        $html = view('order.print', compact('order'));
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        $output = $dompdf->output();
+
+        return response()->make($output, 200, [
+            'Content-Type' => 'application/pdf',
+        ]);
+
+        $dompdf->stream('INV/' . strtotime($order->created_at));
     }
 }
