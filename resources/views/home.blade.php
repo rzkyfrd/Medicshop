@@ -118,25 +118,29 @@
 
                                 @foreach ($product as $row)
                                     <li class="border-2 border-gray-100">
-                                        <a href="#" class="group relative block overflow-hidden">
+                                        <div class="group relative block overflow-hidden">
+                                            <a href="{{ route('product.detail', $row) }}">
                                             <img src="{{ $row->image }}" alt=""
                                                 class=" h-[200px] max-h-[200px] mx-auto transition duration-500 group-hover:scale-105 sm:h-72" />
+                                            </a>
 
                                             <div class="relative border-t-4 border-gray-100 bg-white px-3 py-2 mt-1">
                                                 <h3 class="mt-1 text-lg font-medium text-gray-900 font-bold">
                                                     {{ $row->name }}
                                                 </h3>
                                                 <p class="mt-1.5 text-sm text-gray-700">@currency($row->price)</p>
-                                                <form class="mt-4">
-                                                    <input type="hidden" name="">
-                                                    <button
-                                                        class="block w-full rounded bg-red-600 text-white p-4 hover text-sm font-medium transition hover:scale-105">
-
+                                            </div>
+                                            <div class="px-2 mb-2">
+                                                <form action="{{ route('cart.store') }}" method="POST">
+                                                    @csrf
+                                                    {{-- <input type="hidden" name=""> --}}
+                                                    <input type="hidden" id="id" name="id" value="{{ $row->id }}">
+                                                    <button class="block w-full rounded bg-red-600 text-white px-4 py-2 mt-2 text-sm font-medium hover:bg-red-700">
                                                         Add to Cart
                                                     </button>
                                                 </form>
                                             </div>
-                                        </a>
+                                        </div>
                                     </li>
                                 @endforeach
                             </ul>

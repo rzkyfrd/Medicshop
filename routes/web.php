@@ -31,7 +31,7 @@ Route::get('/dashboard', function () {
 
 route::get('/product/detail/{product}', function (Product $product) {
     return view('product.productdetail', compact('product'));
-});
+})->name('product.detail');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
