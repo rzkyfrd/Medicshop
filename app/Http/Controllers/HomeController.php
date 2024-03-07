@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -16,7 +17,7 @@ class HomeController extends Controller
         $categories = json_decode($request->categories ?? '[]', true);
 
         $product = Product::when($keyword, function ($query, $value) {
-            $query->where('name', $value);
+            $query->whereRaw(DB::raw("lower(name) like '%" . trim($value) . "%'"));
         })->when($categories, function ($query, $value) {
             $query->whereIn('category_id', $value);
         })->paginate($this->pagination);
