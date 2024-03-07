@@ -21,10 +21,36 @@
     color: #818cf8;
 }
 
+html {
+    overflow: hidden;
+}
+
 @media (min-width: 768px) {
     .children {
         position: absolute;
         width: 155px;
         top: 70px;
     }
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #e6e6e6;
+    border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #a1a1a1;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
