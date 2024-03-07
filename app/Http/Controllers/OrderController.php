@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderFormRequest;
 use App\Models\Cart;
 use App\Models\User;
 use App\Models\Category;
@@ -9,6 +10,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -35,9 +37,19 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(OrderFormRequest $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            Cart::create($request->all());
+
+            DB::commit();
+            return redirect()->route('order.index')->with('message', 'Order precessed successfully');
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return redirect()->back()->withInput()->withErrors(['Failed To Process Order']);
+        }
     }
 
     /**

@@ -42,7 +42,7 @@ class ProductController extends Controller
         $data["image"] = '/storage/' . $path;
 
         Product::create($data);
-        return redirect('/product')->with('message', 'Product Added Successfully');
+        return redirect()->route('master.product.index')->with('message', 'Product Added Successfully');
     }
 
     /**
@@ -70,12 +70,14 @@ class ProductController extends Controller
         $data = $request->validated();
         $image = $request->file('image');
 
-        $fileName = time() . $image->getClientOriginalName();
-        $path = $request->file('image')->storeAs('images', $fileName, 'public');
-        $data["image"] = '/storage/' . $path;
+        if($image){
+            $fileName = time() . $image->getClientOriginalName();
+            $path = $request->file('image')->storeAs('images', $fileName, 'public');
+            $data["image"] = '/storage/' . $path;
+        }
 
         $product->update($data);
-        return redirect('/product')->with('message', 'Product Updated Successfully');
+        return redirect()->route('master.product.index')->with('message', 'Product Updated Successfully');
     }
 
     /**
