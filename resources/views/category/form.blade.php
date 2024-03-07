@@ -9,7 +9,8 @@
     <div class="py-8">
         <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
             <div class="px-14 py-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <form action="{{ $category->exists ? route('category.update', $category) : route('category.store') }}"
+                <form
+                    action="{{ $category->exists ? route('master.category.update', $category) : route('master.category.store') }}"
                     method="POST">
                     @csrf
                     @if ($category->exists)
@@ -47,8 +48,9 @@
                             {{ __('Save') }}
                         </x-primary-button>
 
-                        <x-danger-button class="ml-3">
-                            <a class="waves-effect waves-light" href="{{ url('category') }}" role="button">
+                        <x-danger-button role="button" class="ml-3">
+                            <a class="waves-effect waves-light" href="{{ route('master.category.index') }}"
+                                role="button">
                                 {{ __('Back') }}
                             </a>
                             </x-primary-button>

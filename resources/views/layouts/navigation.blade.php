@@ -21,14 +21,14 @@
                         </x-nav-link>
                     @endif
                     @if (Auth::user()?->is_admin)
-                        <x-nav-link-parent :href="'#'" :active="request()->routeIs('padron.*')">
+                        <x-nav-link-parent :href="'#'" :active="request()->routeIs('master.*')">
                             <x-slot name="name">Data Master</x-slot>
                             <x-slot name="children">
-                                <a href="user">Data User</a>
+                                <a href="{{ route('master.user.index') }}">Data User</a>
                                 <span class="separator"></span>
-                                <a href="category">Data Category</a>
+                                <a href="{{ route('master.category.index') }}">Data Category</a>
                                 <span class="separator"></span>
-                                <a href="product">Data Product</a>
+                                <a href="{{ route('master.product.index') }}">Data Product</a>
                             </x-slot>
                         </x-nav-link-parent>
                         <x-nav-link :href="route('home')">

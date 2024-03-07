@@ -14,7 +14,7 @@
 
             <div class="py-2 px-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <h4 class="py-2">
-                    <a class="btn btn-success waves-effect waves-light" href="{{ route('product.create') }}"
+                    <a class="btn btn-success waves-effect waves-light" href="{{ route('master.product.create') }}"
                         role="button">
                         Add Product
                     </a>
@@ -43,14 +43,14 @@
                                 </td>
                                 <td>@currency($item->price)</td>
                                 <td>
-                                    <a href="{{ route('product.edit', $item) }}" class="btn btn-primary">
+                                    <a href="{{ route('master.product.edit', $item) }}" class="btn btn-primary">
                                         Edit
                                     </a>
                                     {{-- <button class="btn btn-danger">Delete</button> --}}
 
                                     <button class="btn btn-danger" data-id="{{ $item }}"
                                         data-nama="{{ $item }}"
-                                        data-location="{{ route('product.edit', $item) }}">Delete
+                                        data-location="{{ route('master.product.edit', $item) }}">Delete
                                     </button>
                                     {{-- <button class="btn btn-danger btn-sm" data-id="{{ $row->id }}" data-nama="{{ $row->namabarang }}" data-location="/deletebarang/{{ $row->id }}">
                                         <i class="uil uil-trash-alt font-size-15"></i>

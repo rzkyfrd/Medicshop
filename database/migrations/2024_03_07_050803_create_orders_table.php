@@ -13,7 +13,19 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->Biginteger('user_id')->unsigned()->nullable();
+            $table->string('name');
+            $table->string('address');
+            $table->string('city');
+            $table->string('contact');
+            $table->string('status');
+            $table->string('payment_method');
+            $table->string('bank')->nullable();
+            $table->string('courier')->nullable();
             $table->timestamps();
+        });
+        Schema::table('orders', function ($table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

@@ -9,7 +9,8 @@
     <div class="py-4">
         <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
             <div class="px-10 py-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <form action="{{ $product->exists ? route('product.update', $product) : route('product.store') }}"
+                <form
+                    action="{{ $product->exists ? route('master.product.update', $product) : route('master.product.store') }}"
                     method="POST" enctype="multipart/form-data">
                     @csrf
                     @if ($product->exists)
@@ -63,8 +64,9 @@
                             {{ __('Save') }}
                         </x-primary-button>
 
-                        <x-danger-button class="ml-3">
-                            <a class="waves-effect waves-light" href="{{ url('product') }}" role="button">
+                        <x-danger-button role="button" class="ml-3">
+                            <a class="waves-effect waves-light" href="{{ route('master.product.index') }}"
+                                role="button">
                                 {{ __('Back') }}
                             </a>
                             </x-primary-button>

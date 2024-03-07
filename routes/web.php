@@ -44,11 +44,11 @@ Route::middleware('auth')->group(function () {
 //     Route::get('/add-category', 'create');
 //     Route::post('/save-category', 'store');
 // });
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth', 'prefix' => 'master', 'as' => 'master.'], function () {
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);
     Route::resource('cart', CartController::class);
+    Route::resource('user', UserController::class);
 });
-Route::resource('user', UserController::class);
 
 require __DIR__ . '/auth.php';

@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detailorders', function (Blueprint $table) {
+        Schema::create('order_logs', function (Blueprint $table) {
             $table->id();
+            $table->Biginteger('order_id')->unsigned()->nullable();
+            $table->string('status');
             $table->timestamps();
+        });
+        Schema::table('order_logs', function ($table) {
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('set null');
         });
     }
 
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detailorders');
+        Schema::dropIfExists('order_logs');
     }
 };

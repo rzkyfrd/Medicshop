@@ -132,7 +132,7 @@
                                 @foreach ($product as $row)
                                     <li class="border-2 border-gray-100">
                                         <div class="group relative block overflow-hidden">
-                                            <a href="{{ route('product.detail', $row) }}">
+                                            <a href="{{ route('master.product.detail', $row) }}">
                                                 <img src="{{ $row->image }}" alt=""
                                                     class=" h-[200px] max-h-[200px] mx-auto transition duration-500 group-hover:scale-105 sm:h-72" />
                                             </a>
