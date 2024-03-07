@@ -1,16 +1,7 @@
 <x-app-layout>
 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Cart') }}
-        </h2>
-    </x-slot>
-
-    {{-- session status --}}
-    {{-- <x-auth-session-status class="mb-4" :status="Session('message')" /> --}}
-
     <div class="py-12 ">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="w-3/4 mx-auto sm:px-6 lg:px-8">
             <div class="py-2 px-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <section>
                     <div class="mx-auto max-w-screen-xl px-4 py-4 sm:px-6 sm:py-12 lg:px-8">
@@ -110,7 +101,7 @@
 
                                         <div class="flex justify-end">
                                             <div class="px-2">
-                                                <a class=" group relative inline-flex items-center overflow-hidden rounded bg-indigo-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+                                                <a class=" group relative inline-flex items-center overflow-hidden rounded bg-gray-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-gray-500"
                                                     href="/">
                                                     <span
                                                         class="absolute -start-full transition-all group-hover:start-4">

@@ -3,6 +3,9 @@
     <div class="py-4">
         <div class="w-3/4 mx-auto sm:px-6 lg:px-8">
             <div class="px-10 py-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <p class="text-right font-semibold mb-2">
+                    <a href="{{ route('cart.index') }}"><x-fas-arrow-left-long class="w-4 inline-block mr-4" /> Back</a>
+                </p>
                 <header class="text-center">
                     <h1 class="text-xl font-bold text-gray-900 sm:text-3xl">Order</h1>
                 </header>
@@ -60,12 +63,6 @@
                         <x-primary-button class="ml-3">
                             {{ __('Procced') }}
                         </x-primary-button>
-
-                        <x-danger-button role="button" class="ml-3">
-                            <a class="waves-effect waves-light" href="{{ route('cart.index') }}" role="button">
-                                {{ __('Back') }}
-                            </a>
-                            </x-primary-button>
                     </div>
                 </form>
 
