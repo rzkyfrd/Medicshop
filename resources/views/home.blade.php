@@ -72,8 +72,13 @@
                                 <div class="mb-2">
                                     {{-- <a href="">{{ $row->name }}</a> <br> --}}
                                     <div class="flex justify-between">
-                                        <label class="cursor-pointer hover:font-semibold" for="category{{$row->id}}">{{ $row->name }}</label>
-                                        <input onchange="submitForm()" {{ in_array($row->id, $categories) ? 'checked' : '' }} class="rounded focus:ring-0 cursor-pointer" type="checkbox" value="{{ $row->id }}" name="category" id="category{{$row->id}}">
+                                        <label class="cursor-pointer hover:font-semibold"
+                                            for="category{{ $row->id }}">{{ $row->name }}</label>
+                                        <input onchange="submitForm()"
+                                            {{ in_array($row->id, $categories) ? 'checked' : '' }}
+                                            class="rounded focus:ring-0 cursor-pointer" type="checkbox"
+                                            value="{{ $row->id }}" name="category"
+                                            id="category{{ $row->id }}">
                                     </div>
                                 </div>
                             @endforeach
@@ -96,9 +101,11 @@
                                     <div class="flex items-center max-w-sm mx-auto">
                                         <label for="search" class="sr-only">Search</label>
                                         <div class="relative w-full">
-                                            <input type="text" id="search" onkeydown="event.key == 'Enter' ? submitForm() : ''"
+                                            <input type="text" id="search"
+                                                onkeydown="event.key == 'Enter' ? submitForm() : ''"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-4 p-1.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="Search product name..." required value="{{ $keyword }}" />
+                                                placeholder="Search product name..." required
+                                                value="{{ $keyword }}" />
                                         </div>
                                         <button type="submit" onclick="submitForm()"
                                             class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-none dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -126,8 +133,8 @@
                                     <li class="border-2 border-gray-100">
                                         <div class="group relative block overflow-hidden">
                                             <a href="{{ route('product.detail', $row) }}">
-                                            <img src="{{ $row->image }}" alt=""
-                                                class=" h-[200px] max-h-[200px] mx-auto transition duration-500 group-hover:scale-105 sm:h-72" />
+                                                <img src="{{ $row->image }}" alt=""
+                                                    class=" h-[200px] max-h-[200px] mx-auto transition duration-500 group-hover:scale-105 sm:h-72" />
                                             </a>
 
                                             <div class="relative border-t-4 border-gray-100 bg-white px-3 py-2 mt-1">
@@ -140,8 +147,11 @@
                                                 <form action="{{ route('cart.store') }}" method="POST">
                                                     @csrf
                                                     {{-- <input type="hidden" name=""> --}}
-                                                    <input type="hidden" id="id" name="id" value="{{ $row->id }}">
-                                                    <button class="block w-full rounded bg-red-600 text-white px-4 py-2 mt-2 text-sm font-medium hover:bg-red-700">
+                                                    <input type="hidden" id="id" name="id"
+                                                        value="{{ $row->id }}">
+                                                    <input type="hidden" name="quantity" id="quantity" value="1">
+                                                    <button
+                                                        class="block w-full rounded bg-red-600 text-white px-4 py-2 mt-2 text-sm font-medium hover:bg-red-700">
                                                         Add to Cart
                                                     </button>
                                                 </form>
@@ -156,57 +166,6 @@
                                     {{ $product->links() }}
                                 </div>
                             @endif
-                            {{-- <ol class="mt-8 flex justify-center gap-1 text-xs font-medium">
-                                <li>
-                                    <a href="#"
-                                        class="inline-flex size-8 items-center justify-center rounded border border-gray-100">
-                                        <span class="sr-only">Prev Page</span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20"
-                                            fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#"
-                                        class="block size-8 rounded border border-gray-100 text-center leading-8">
-                                        1
-                                    </a>
-                                </li>
-
-                                <li class="block size-8 rounded border-black bg-black text-center leading-8 text-white">
-                                    2</li>
-
-                                <li>
-                                    <a href="#"
-                                        class="block size-8 rounded border border-gray-100 text-center leading-8">
-                                        3
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#"
-                                        class="block size-8 rounded border border-gray-100 text-center leading-8">
-                                        4
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#"
-                                        class="inline-flex size-8 items-center justify-center rounded border border-gray-100">
-                                        <span class="sr-only">Next Page</span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20"
-                                            fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ol> --}}
                         </div>
                     </section>
 
@@ -219,17 +178,17 @@
         </form>
     </div>
     <script type="module">
-        window.submitForm = function () {
+        window.submitForm = function() {
             let categories = [];
-            $("input:checkbox[name=category]:checked").each(function(){
+            $("input:checkbox[name=category]:checked").each(function() {
                 categories.push($(this).val());
             });
             $('#keyword').val($('#search').val());
 
-            if(categories.length > 0 || $('#keyword').val() !== ''){
+            if (categories.length > 0 || $('#keyword').val() !== '') {
                 $('#categories').show();
                 $('#categories').val(JSON.stringify(categories));
-            }else{
+            } else {
                 $('#categories').hide();
             }
             $('#mainForm').submit();

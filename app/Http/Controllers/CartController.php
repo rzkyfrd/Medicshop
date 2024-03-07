@@ -44,9 +44,9 @@ class CartController extends Controller
             return redirect('/')->with('message', 'Cart can only be accessed for customers');
         }
         $cart = Cart::where('user_id', $user_id)->where('product_id', $request->id)->get();
-        $idcart = Cart::where('user_id', $user_id)->where('product_id', $request->id)->first(['id'])->id;
         $count = $cart->count();
         if ($count == 1) {
+            $idcart = Cart::where('user_id', $user_id)->where('product_id', $request->id)->first(['id'])->id;
             $amount = Cart::where('user_id', $user_id)->where('product_id', $request->id)->first(['quantity'])->quantity;
             $cart = Cart::find($idcart);
             $amount = $amount + $request->quantity;

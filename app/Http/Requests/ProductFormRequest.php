@@ -34,7 +34,7 @@ class ProductFormRequest extends FormRequest
             ],
             'desc' => [
                 'required',
-                'max:255'
+                'max:555'
             ],
             'image' => [
                 'required',
