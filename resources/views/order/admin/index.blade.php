@@ -119,7 +119,7 @@
                                                 <form method="POST" action="{{ route('order.update', $order) }}" class="p-6">
                                                     @csrf
                                                     @method('PUT')
-                                                    <input type="hidden" name="status" value="Finish">
+                                                    <input type="hidden" name="status" value="Finished">
 
                                                     <h2 class="text-lg font-medium text-gray-900">
                                                         {{ __('Change this order status to Finish ?') }}
