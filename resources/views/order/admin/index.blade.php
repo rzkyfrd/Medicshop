@@ -1,10 +1,10 @@
 <x-app-layout>
 
-    {{-- <x-slot name="header">
+    <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Product') }}
+            {{ __('Order Lists') }}
         </h2>
-    </x-slot> --}}
+    </x-slot>
 
     {{-- session status --}}
     {{-- <x-auth-session-status class="mb-4" :status="Session('message')" /> --}}
@@ -141,7 +141,7 @@
                                                 </form>
                                             </x-modal>
                                         @endif
-                                        @if(!in_array($order->status, ['Canceled', 'Finished']))
+                                        @if(!in_array($order->status, ['Canceled', 'Finished', 'Finish']))
                                             <button
                                             x-data={}
                                             x-on:click.prevent="$dispatch('open-modal', 'confirm-order-cancel')"
