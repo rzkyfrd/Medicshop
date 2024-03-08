@@ -42,7 +42,7 @@
 
 
                     @if (Auth::user()?->is_admin == 0)
-                        <x-nav-link :href="'#'">
+                        <x-nav-link :href="route('costumer-feedback.create')" :active="request()->routeIs('customer-feedback.*')">
                             {{ __('Customer Feedback') }}
                         </x-nav-link>
                     @endif

@@ -54,7 +54,7 @@
                                             type="submit" class="btn btn-info bg-blue-300 hover:bg-white hover:text-blue-400">Process</button>
 
                                             <x-modal name="confirm-order-process" focusable>
-                                                <form method="POST" action="{{ route('order.update', $order) }}" class="p-6">
+                                                <form id="process{{$order->id}}" method="POST" action="{{ route('order.update', $order) }}" class="p-6">
                                                     @csrf
                                                     @method('PUT')
                                                     <input type="hidden" name="status" value="Process">
@@ -85,7 +85,7 @@
                                             type="submit" class="btn btn-warning bg-yellow-400 hover:bg-white hover:text-yellow-500">Shipping</button>
 
                                             <x-modal name="confirm-order-shipping" focusable>
-                                                <form method="POST" action="{{ route('order.update', $order) }}" class="p-6">
+                                                <form id="shipping{{$order->id}}" method="POST" action="{{ route('order.update', $order) }}" class="p-6">
                                                     @csrf
                                                     @method('PUT')
                                                     <input type="hidden" name="status" value="Shipping">
@@ -116,7 +116,7 @@
                                             type="submit" class="btn btn-success bg-green-500 hover:bg-white hover:text-green-600">Finish</button>
 
                                             <x-modal name="confirm-order-finished" focusable>
-                                                <form method="POST" action="{{ route('order.update', $order) }}" class="p-6">
+                                                <form id="finished{{$order->id}}" method="POST" action="{{ route('order.update', $order) }}" class="p-6">
                                                     @csrf
                                                     @method('PUT')
                                                     <input type="hidden" name="status" value="Finished">
@@ -141,14 +141,14 @@
                                                 </form>
                                             </x-modal>
                                         @endif
-                                        @if($order->status !== 'Finish')
+                                        @if(!in_array($order->status, ['Canceled', 'Finished']))
                                             <button
                                             x-data={}
                                             x-on:click.prevent="$dispatch('open-modal', 'confirm-order-cancel')"
                                             type="submit" class="btn btn-danger bg-red-500 hover:bg-white hover:text-red-600">Cancel</button>
 
                                             <x-modal name="confirm-order-cancel" focusable>
-                                                <form method="POST" action="{{ route('order.destroy', $order) }}" class="p-6">
+                                                <form id="cancel{{$order->id}}" method="POST" action="{{ route('order.destroy', $order) }}" class="p-6">
                                                     @csrf
                                                     @method('PUT')
                                                     <input type="hidden" name="status" value="Canceled">
