@@ -40,6 +40,8 @@
                 width: 16cm;
             }
 
+            .page_break { page-break-before: always; }
+
             table { border-collapse: collapse; }
 
             tr, td { padding: 0; }
@@ -143,7 +145,9 @@
                                             </table>
                                         </td>
                                     </tr>
-                                    <div style="page-break-after: always;"></div>
+                                    @if (($key+1) % 5 == 0)
+                                        <div class="page_break"></div>
+                                    @endif
                                 @endforeach
                                 <tr style="border: 1px solid;">
                                     <td style="padding: 0 10px;border: 1px solid;" colspan="3">Total (Including Tax)</td>
@@ -166,7 +170,7 @@
                 </tr>
             </tbody>
         </table>
-        <div style="margin-top: 50px;text-align: right">
+        <div style="margin-top: 70px;text-align: right">
             <b><u>E-MEDICSHOP</u></b>
         </div>
 	</main>

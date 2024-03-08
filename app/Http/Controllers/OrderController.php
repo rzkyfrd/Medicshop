@@ -122,12 +122,6 @@ class OrderController extends Controller
 
     public function print(Order $order)
     {
-        $order->details = collect([
-            ...$order->details,
-            ...$order->details,
-            ...$order->details,
-            ...$order->details,
-        ]);
         $dompdf = new Dompdf();
         $html = view('order.print', compact('order'));
         $dompdf->loadHtml($html);
