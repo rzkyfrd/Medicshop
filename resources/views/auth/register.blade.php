@@ -63,9 +63,9 @@
             <!-- TW Elements is free under AGPL, with commercial license required for specific uses. See more details: https://tw-elements.com/license/ and contact us for queries at tailwind@mdbootstrap.com -->
             <select id="gender" name="gender" required autocomplete="gender"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option selected>Choose a Gender</option>
-                <option value="Man">Man</option>
-                <option value="Woman">Woman</option>
+                <option disabled>Choose a Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
             </select>
             <x-input-error :messages="$errors->get('gender')" class="mt-2" />
         </div>
@@ -83,7 +83,7 @@
             <x-input-label for="city" :value="__('City')" />
             <select id="city" name="city" required autocomplete="city"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option selected>Choose a City</option>
+                <option disabled>Choose a City</option>
                 <option value="Jakarta">Jakarta</option>
                 <option value="Surabaya">Surabaya</option>
                 <option value="Bandung">Bandung</option>

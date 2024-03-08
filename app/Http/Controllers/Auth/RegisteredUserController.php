@@ -30,12 +30,19 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'contact' => ['required', 'string', 'max:20'],
+            'datebirth' => ['required'],
+            'gender' => ['required', 'in:male,female'],
+            'address' => ['required'],
+            'city' => ['required'],
+            'paypal_id' => ['string', 'max:20'],
+
         ]);
 
         $user = User::create([
@@ -44,6 +51,11 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'contact' => $request->contact,
+            'datebirth' => $request->datebirth,
+            'gender' => $request->gender,
+            'address' => $request->address,
+            'city' => $request->city,
+            'paypal_id' => $request->paypal_id,
         ]);
 
         event(new Registered($user));
