@@ -54,7 +54,7 @@
                                             type="submit" class="btn btn-info bg-blue-300 hover:bg-white hover:text-blue-400">Process</button>
 
                                             <x-modal name="confirm-order-process" focusable>
-                                                <form method="POST" action="{{ route('order.destroy', $order) }}" class="p-6">
+                                                <form method="POST" action="{{ route('order.update', $order) }}" class="p-6">
                                                     @csrf
                                                     @method('PUT')
                                                     <input type="hidden" name="status" value="Process">
@@ -78,14 +78,14 @@
                                                     </div>
                                                 </form>
                                             </x-modal>
-                                        @else
+                                        @elseif($order->status === 'Process')
                                             <button
                                             x-data={}
                                             x-on:click.prevent="$dispatch('open-modal', 'confirm-order-shipping')"
                                             type="submit" class="btn btn-warning bg-yellow-400 hover:bg-white hover:text-yellow-500">Shipping</button>
 
                                             <x-modal name="confirm-order-shipping" focusable>
-                                                <form method="POST" action="{{ route('order.destroy', $order) }}" class="p-6">
+                                                <form method="POST" action="{{ route('order.update', $order) }}" class="p-6">
                                                     @csrf
                                                     @method('PUT')
                                                     <input type="hidden" name="status" value="Shipping">
@@ -109,37 +109,70 @@
                                                     </div>
                                                 </form>
                                             </x-modal>
+                                        @elseif($order->status === 'Shipping')
+                                            <button
+                                            x-data={}
+                                            x-on:click.prevent="$dispatch('open-modal', 'confirm-order-finished')"
+                                            type="submit" class="btn btn-success bg-green-500 hover:bg-white hover:text-green-600">Finish</button>
+
+                                            <x-modal name="confirm-order-finished" focusable>
+                                                <form method="POST" action="{{ route('order.update', $order) }}" class="p-6">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input type="hidden" name="status" value="Finish">
+
+                                                    <h2 class="text-lg font-medium text-gray-900">
+                                                        {{ __('Change this order status to Finish ?') }}
+                                                    </h2>
+
+                                                    <p class="mt-1 text-sm text-gray-600">
+                                                        {{ __('This action will change order status to Finish') }}
+                                                    </p>
+
+                                                    <div class="mt-6 flex justify-end">
+                                                        <x-secondary-button x-on:click="$dispatch('close')">
+                                                            {{ __('Cancel') }}
+                                                        </x-secondary-button>
+
+                                                        <x-primary-button class="ms-3">
+                                                            {{ __('Finish') }}
+                                                        </x-primary-button>
+                                                    </div>
+                                                </form>
+                                            </x-modal>
                                         @endif
-                                        <button
-                                        x-data={}
-                                        x-on:click.prevent="$dispatch('open-modal', 'confirm-order-cancel')"
-                                        type="submit" class="btn btn-danger bg-red-500 hover:bg-white hover:text-red-600">Cancel</button>
+                                        @if($order->status !== 'Finish')
+                                            <button
+                                            x-data={}
+                                            x-on:click.prevent="$dispatch('open-modal', 'confirm-order-cancel')"
+                                            type="submit" class="btn btn-danger bg-red-500 hover:bg-white hover:text-red-600">Cancel</button>
 
-                                        <x-modal name="confirm-order-cancel" focusable>
-                                            <form method="POST" action="{{ route('order.destroy', $order) }}" class="p-6">
-                                                @csrf
-                                                @method('PUT')
-                                                <input type="hidden" name="status" value="Canceled">
+                                            <x-modal name="confirm-order-cancel" focusable>
+                                                <form method="POST" action="{{ route('order.destroy', $order) }}" class="p-6">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input type="hidden" name="status" value="Canceled">
 
-                                                <h2 class="text-lg font-medium text-gray-900">
-                                                    {{ __('Change this order status to Canceled ?') }}
-                                                </h2>
+                                                    <h2 class="text-lg font-medium text-gray-900">
+                                                        {{ __('Change this order status to Canceled ?') }}
+                                                    </h2>
 
-                                                <p class="mt-1 text-sm text-gray-600">
-                                                    {{ __('This action will change order status to Canceled') }}
-                                                </p>
+                                                    <p class="mt-1 text-sm text-gray-600">
+                                                        {{ __('This action will change order status to Canceled') }}
+                                                    </p>
 
-                                                <div class="mt-6 flex justify-end">
-                                                    <x-secondary-button x-on:click="$dispatch('close')">
-                                                        {{ __('Cancel') }}
-                                                    </x-secondary-button>
+                                                    <div class="mt-6 flex justify-end">
+                                                        <x-secondary-button x-on:click="$dispatch('close')">
+                                                            {{ __('Cancel') }}
+                                                        </x-secondary-button>
 
-                                                    <x-primary-button class="ms-3">
-                                                        {{ __('Continue') }}
-                                                    </x-primary-button>
-                                                </div>
-                                            </form>
-                                        </x-modal>
+                                                        <x-primary-button class="ms-3">
+                                                            {{ __('Continue') }}
+                                                        </x-primary-button>
+                                                    </div>
+                                                </form>
+                                            </x-modal>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

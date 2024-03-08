@@ -122,16 +122,24 @@ class OrderController extends Controller
 
     public function print(Order $order)
     {
+        $order->details = collect([
+            ...$order->details,
+            ...$order->details,
+            ...$order->details,
+            ...$order->details,
+        ]);
         $dompdf = new Dompdf();
         $html = view('order.print', compact('order'));
         $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->setPaper('A5', 'landscape');
         $dompdf->render();
 
         $output = $dompdf->output();
+        $filename = 'ORD/' . strtotime($order->created_at) . '.pdf';
 
         return response()->make($output, 200, [
             'Content-Type' => 'application/pdf',
+            // 'Content-Disposition' => 'attachment; filename="'. $filename .'"'
         ]);
 
         $dompdf->stream('INV/' . strtotime($order->created_at));

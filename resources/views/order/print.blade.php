@@ -18,7 +18,7 @@
                 padding-right: 1cm;
                 padding-left: 1cm;
                 padding-top: 0cm;
-                padding-bottom: 3cm;
+                padding-bottom: 1cm;
                 font-family: 'Arial Narrow', Arial, sans-serif;
             }
 
@@ -54,8 +54,10 @@
 	<main>
         <div style="text-align: center">
             <img style="margin-left: auto;margin-right: auto;" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('img/logo.png'))) }}" alt="">
+            <br><br>
+            <b><u>{{ 'ORD/' . strtotime($order->created_at) }}</u></b>
         </div>
-        <br><br><br>
+        <br><br>
         <table style="width: 100%;">
             <tbody>
                 <tr>
@@ -125,7 +127,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($order->details as $item)
+                                @foreach ($order->details as $key => $item)
                                     <tr style="border: 1px solid;">
                                         <td style="padding: 0 10px;border: 1px solid;">{{ $loop->iteration }}</td>
                                         <td style="padding: 0 10px;border: 1px solid;text-align: left;">{{ $item->product->name }}</td>
@@ -141,6 +143,7 @@
                                             </table>
                                         </td>
                                     </tr>
+                                    <div style="page-break-after: always;"></div>
                                 @endforeach
                                 <tr style="border: 1px solid;">
                                     <td style="padding: 0 10px;border: 1px solid;" colspan="3">Total (Including Tax)</td>
@@ -163,8 +166,7 @@
                 </tr>
             </tbody>
         </table>
-        <br><br><br><br><br><br>
-        <div style="text-align: right">
+        <div style="margin-top: 50px;text-align: right">
             <b><u>E-MEDICSHOP</u></b>
         </div>
 	</main>
